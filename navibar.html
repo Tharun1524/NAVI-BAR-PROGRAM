@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>navibar login</title>
+</head>
+<body>
+  <input type="text" id="notif" placeholder="Enter notification text">
+  <button onclick="notification()">Show Notification</button>
+
+  <script>
+    const input = document.getElementById('notif');
+
+    function notification() {
+      Notification.requestPermission().then(function(result) {
+        if (result === 'granted') {
+          popupNotif();
+        } else {
+          console.log('Permission denied');
+        }
+      });
+    }
+
+    function popupNotif() {
+      const notification = new Notification('New Notification', {
+        body: input.value || 'This is a default notification message.'
+      });
+
+      notification.onclick = function() {
+        console.log('Notification clicked!');
+      };
+    }
+  </script>
+</body>
+</html>
